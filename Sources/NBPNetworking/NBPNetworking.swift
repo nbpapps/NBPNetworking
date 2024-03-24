@@ -16,7 +16,7 @@ public enum NetworkError: Error {
 
 public typealias NetworkCompletion = (Result<Data, NetworkError>) -> Void
 
-class URLSessionNetworkAccess: NetworkAccessing {
+public class URLSessionNetworkAccess: NetworkAccessing {
     
     private let session: URLSession
     
@@ -24,7 +24,7 @@ class URLSessionNetworkAccess: NetworkAccessing {
         self.session = session
     }
     
-    func fetchData(for request: Request) async throws -> Data {
+    public func fetchData(for request: Request) async throws -> Data {
         do {
             let (data, response) = try await session.data(for: request.build())
             guard let
@@ -40,7 +40,7 @@ class URLSessionNetworkAccess: NetworkAccessing {
         }
     }
     
-    func fetchData(for request: Request, then completion: @escaping NetworkCompletion) {
+    public func fetchData(for request: Request, then completion: @escaping NetworkCompletion) {
         let dataTask = session.dataTask(with: request.build()) { data, response, error in
             guard error == nil else {
                 completion(.failure(.networkError(text: error?.localizedDescription)))
