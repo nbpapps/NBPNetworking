@@ -67,8 +67,13 @@ public class URLSessionNetworkAccess: NetworkAccessing {
 }
 
 public struct Request {
-    let url: URL
-    let method: Method
+    private let url: URL
+    private let method: Method
+    
+    public init(url: URL, method: Method) {
+        self.url = url
+        self.method = method
+    }
 }
 
 extension Request {
@@ -84,7 +89,7 @@ extension Request {
     }
 }
 
-enum Method {
+public enum Method {
     case get
 }
 
