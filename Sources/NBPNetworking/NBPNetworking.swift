@@ -3,18 +3,18 @@
 
 import Foundation
 
-protocol NetworkAccessing {
+public protocol NetworkAccessing {
     func fetchData(for request: Request, then completion: @escaping NetworkCompletion)
     func fetchData(for request: Request) async throws -> Data
 }
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     case networkError(text: String?)
     case responseError
     case invalidData
 }
 
-typealias NetworkCompletion = (Result<Data, NetworkError>) -> Void
+public typealias NetworkCompletion = (Result<Data, NetworkError>) -> Void
 
 class URLSessionNetworkAccess: NetworkAccessing {
     
@@ -66,7 +66,7 @@ class URLSessionNetworkAccess: NetworkAccessing {
     }
 }
 
-struct Request {
+public struct Request {
     let url: URL
     let method: Method
 }
