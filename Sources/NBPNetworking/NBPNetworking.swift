@@ -20,7 +20,7 @@ public class URLSessionNetworkAccess: NetworkAccessing {
     
     private let session: URLSession
     
-    init(session: URLSession = URLSession.shared) {
+    public init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
