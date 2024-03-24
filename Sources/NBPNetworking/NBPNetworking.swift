@@ -1,6 +1,3 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-
 import Foundation
 
 public protocol NetworkAccessing {
@@ -47,8 +44,8 @@ public class URLSessionNetworkAccess: NetworkAccessing {
                 return
             }
             guard let
-                networkResponse = response as? HTTPURLResponse,
-                networkResponse.statusCode == 200
+                    networkResponse = response as? HTTPURLResponse,
+                  networkResponse.statusCode == 200
             else {
                 completion(.failure(.responseError))
                 return
@@ -58,45 +55,8 @@ public class URLSessionNetworkAccess: NetworkAccessing {
                 completion(.failure(.invalidData))
                 return
             }
-            
             completion(.success(data))
         }
-        
         dataTask.resume()
-    }
-}
-
-public struct Request {
-    private let url: URL
-    private let method: Method
-    
-    public init(url: URL, method: Method) {
-        self.url = url
-        self.method = method
-    }
-}
-
-extension Request {
-    func build() -> URLRequest {
-        var request = URLRequest(
-            url: self.url,
-            cachePolicy: .useProtocolCachePolicy,
-            timeoutInterval: 10.0
-        )
-        
-        request.httpMethod = self.method.httpMethod
-        return request
-    }
-}
-
-public enum Method {
-    case get
-}
-
-extension Method {
-    var httpMethod: String {
-        switch self {
-        case .get: return "GET"
-        }
     }
 }
