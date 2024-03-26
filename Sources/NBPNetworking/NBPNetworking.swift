@@ -21,6 +21,10 @@ public class URLSessionNetworkAccess: NetworkAccessing {
         self.session = session
     }
     
+    
+    /// Fetch the data from the network using async/await
+    /// - Parameter request: A Request that includes the URL and HTTP Method
+    /// - Returns: The Data object from this URL
     public func fetchData(for request: Request) async throws -> Data {
         do {
             let (data, response) = try await session.data(for: request.build())
@@ -37,6 +41,10 @@ public class URLSessionNetworkAccess: NetworkAccessing {
         }
     }
     
+    /// Fetch the data from the network using a completion block
+    /// - Parameters:
+    ///   - request: A Request that includes the URL and HTTP Method
+    ///   - completion: A completion block that includes a Result with <Data, NetworkError>
     public func fetchData(for request: Request, then completion: @escaping NetworkCompletion) {
         let dataTask = session.dataTask(with: request.build()) { data, response, error in
             guard error == nil else {
